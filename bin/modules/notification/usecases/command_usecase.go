@@ -31,7 +31,7 @@ func NewCommandUsecase(mq driver.MongodbRepositoryQuery, mc driver.MongodbReposi
 func (c *commandUsecase) SendNotification(ctx context.Context, payload models.TripOrder) error {
 	message := ""
 	switch payload.Status {
-	case "request-ride":
+	case "request-pickup":
 		message = "Ride has been requested. A driver will be assigned shortly."
 	case "ontheway":
 		message = "Your driver is on the way to pick you up."
@@ -40,6 +40,7 @@ func (c *commandUsecase) SendNotification(ctx context.Context, payload models.Tr
 	default:
 		message = "Unknown status received. Please check the request."
 	}
+
 	driverInfo := <-c.driverRepositoryQuery.FindDriver(ctx, payload.DriverID)
 	if driverInfo.Error != nil {
 		errObj := httpError.BadRequest("Profile Driver not completed")

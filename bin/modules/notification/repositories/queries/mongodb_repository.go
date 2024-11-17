@@ -8,6 +8,7 @@ import (
 	"notification-service/bin/pkg/utils"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type queryMongodbRepository struct {
@@ -25,13 +26,14 @@ func (q queryMongodbRepository) FindDriver(ctx context.Context, userId string) <
 
 	go func() {
 		defer close(output)
+		objId, _ := primitive.ObjectIDFromHex(userId)
 
 		var driver models.User
 		err := q.mongoDb.FindOne(mongodb.FindOne{
 			Result:         &driver,
 			CollectionName: "user",
 			Filter: bson.M{
-				"userId": userId,
+				"_id": objId,
 			},
 		}, ctx)
 		if err != nil {

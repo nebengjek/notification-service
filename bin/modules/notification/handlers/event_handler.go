@@ -8,6 +8,6 @@ import (
 func InitNotificationEventHandler(driver driver.UsecaseCommand, kc kafkaPkgConfluent.Consumer) {
 
 	kc.SetHandler(NewNotificationConsumer(driver))
-	kc.Subscribe("driver-available")
+	kc.Subscribe("trip-created")
 
 }
