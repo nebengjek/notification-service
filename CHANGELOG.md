@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/nebengjek/notification-service/compare/v1.1.0...v1.1.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* extend ttl redis tripplan ([8913c27](https://github.com/nebengjek/notification-service/commit/8913c2711a96a896312127452b2a5eea419f2dc0))
+
 ## 1.1.0 (2024-11-17)
 
 
