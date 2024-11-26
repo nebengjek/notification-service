@@ -2,6 +2,7 @@ package redis
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 
 	"github.com/redis/go-redis/v9"
@@ -13,9 +14,10 @@ func InitConnection() {
 	if !AppConfigData.UseRedis {
 		// Create Redis Client
 		redisClient = redis.NewClient(&redis.Options{
-			Addr:     fmt.Sprintf("%v:%v", RedisConfigData.Host, RedisConfigData.Port),
-			Password: RedisConfigData.Password,
-			DB:       RedisConfigData.DB,
+			Addr:      fmt.Sprintf("%v:%v", RedisConfigData.Host, RedisConfigData.Port),
+			Password:  RedisConfigData.Password,
+			DB:        RedisConfigData.DB,
+			TLSConfig: &tls.Config{},
 		})
 
 		// Test Connection
